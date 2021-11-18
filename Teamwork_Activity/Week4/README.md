@@ -1,3 +1,5 @@
+# 2.404 Teamwork activity: icebreaker
+
 In your team, give a one-sentence description of a project you would be interested in pursuing. Then, for each point, tell your team members in one sentence: 
 
 1. why your proposed solution is unique 

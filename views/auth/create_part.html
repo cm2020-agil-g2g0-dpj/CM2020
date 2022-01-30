@@ -103,6 +103,15 @@
                             <textarea class="form-control" id="p_notes" name="p_notes" rows="3" required></textarea>
                         </div>
                         <div class="mb-4">
+                            <label for="p_status" class="form-label">Part Design Status</label>
+                            <select class="form-select" id="p_status" name="p_status" aria-label="Part Design Status" required>
+                                <option selected disabled value="">Part Status</option>      
+                                <option value="1">Status 1</option>
+                                <option value="2">Status 2</option>
+                                <option value="3">Status 3</option>
+                              </select>                        
+                        </div>
+                        <div class="mb-4">
                             <button type="submit" class="btn btn-primary btn-block form-control">CREATE PART</button>
                         </div>
                     </form>        

@@ -17,12 +17,13 @@ module.exports = function (app) {
         }
     });
     
-    app.post("/create_part", 
+    app.post("/create_new_part", 
     body('p_name').not().isEmpty().trim().escape(),
-    body('p_spec_data').not().isEmpty().trim().escape(),
+    body('p_spec_link').not().isEmpty().trim().escape(),
     body('p_description').not().isEmpty().trim().escape(),
     body('p_issues').not().isEmpty().trim().escape(),
     body('p_notes').not().isEmpty().trim().escape(),
+    body('p_status').not().isEmpty().trim().escape(),
     function (req, res) {
         // express validation
         const errors = validationResult(req);
@@ -48,16 +49,18 @@ module.exports = function (app) {
                     res.redirect('/create_part')
                 }
                 else {
-                    let sqlquery_b = "INSERT INTO parts (name,email,username,password) VALUES (?,?,?,?)";
+                    let timestamp = Date.now();
+                    let sqlquery_b = "INSERT INTO parts (part_name,part_specification_link,part_description,part_issues,part_notes,part_design_status) VALUES (?,?,?,?,?,?)";
                     // execute sql query
-                    let new_user = [req.body.name,req.body.email,req.body.username,req.body.password];
-                    db.query(sqlquery_b, new_user, (err, result) => {
+                    let new_part = [req.body.p_name,req.body.p_spec_link,req.body.p_description,req.body.p_issues,req.body.p_notes,req.body.p_status];
+                    db.query(sqlquery_b, new_part, (err, result) => {
                     if (err) {
-                        req.flash('error', err)
-                        res.redirect('/register')
+                        console.log(err);
+                        req.flash('error', err.array())
+                        res.redirect('/create_part')
                     } else {
-                        req.flash('success', 'You have successfully signed up!');
-                        res.redirect('/register');
+                        req.flash('success', 'You have successfully added a new part!');
+                        res.redirect('/create_part');
                     }
                  });
                 }

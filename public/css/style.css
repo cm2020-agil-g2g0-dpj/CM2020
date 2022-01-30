@@ -1,0 +1,96 @@
+#main_home {
+	min-height: 300px;
+}
+
+#main_success {
+	min-height: 450px;
+}
+
+img.fill {
+	width: -webkit-fill-available;
+}
+
+html, body {
+    font-family: 'Lato', sans-serif;
+    color: #000;
+    height: 100%;
+    scroll-behavior: smooth;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: 'Lato', sans-serif;
+  position: relative;
+  font-style: normal;
+	font-variant: normal;
+  color: #000;
+  line-height: 1.2;
+}
+
+h1,h2,h3,h4 {
+  font-weight: 700;
+}
+
+h5,h6 {
+  font-weight: 500;
+}
+
+h3 {
+  font-size: 28px;
+}
+
+h4 {
+  font-size: 22px;
+}
+
+h5 {
+  font-size: 20px;
+}
+
+h6 {
+  font-size: 18px;
+}
+
+ul{
+  padding-left: 0px;
+  margin-bottom: 0px;
+}
+
+li{
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+ul li a {
+	font-family: 'Lato', sans-serif;
+	font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  font-size: 0.90em;
+	text-decoration: none;
+  color: #000;
+}
+
+p {
+  font-family: 'Lato', sans-serif;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  font-size: 16px;
+	text-decoration: none;
+}
+
+img {
+  position: relative;
+  z-index: 0;
+  left: 0px;
+  top: 0px;
+  border: 0px;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}

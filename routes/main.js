@@ -47,7 +47,7 @@ module.exports = function (app) {
    });
 
    //display home page
-    app.get('/dashboard', function(req, res, next) {
+    app.get('/dashboard', function(req, res) {
         if (req.session.loggedin) {
             res.render('auth/dashboard.html', {
                 title:"Dashboard",

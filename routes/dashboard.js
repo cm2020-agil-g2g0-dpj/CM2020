@@ -3,7 +3,7 @@ const { body, validationResult } = require('express-validator');
 module.exports = function (app) {
 
     //display home page
-    app.get('/create_part', function(req, res, next) {
+    app.get('/create_part', function(req, res) {
         if (req.session.loggedin) {
             res.render('auth/create_part.html', {
                 title:"Create Part",

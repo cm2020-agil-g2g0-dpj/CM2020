@@ -14,6 +14,8 @@ http://localhost:8090/update_part
 
 ==> Create Update Part in dashboard.js
 - OPEN
+==> Create form method="post" action="/update_new_part" 
+-OPEN
 ==> Create ability to seach existing parts and select a part to update_part to update_part
 - OPEN
 == Create ability to update part

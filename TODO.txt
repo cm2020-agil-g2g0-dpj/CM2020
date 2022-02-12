@@ -1,0 +1,31 @@
+http://localhost:8090/create_part
+
+==> Speficify Data Validation, minimum fields and values required in Technical Specifications doc
+e.g. Part must have a name and a specification link, but nDesscription is optional
+- OPEN
+==> Code Data Validation as per Technical Specifications (once complete)
+-OPEN
+==> Specify sensible Part Design Status attributes (in stead of Status 1,2,3)
+- OPEN
+
+
+
+http://localhost:8090/update_part
+
+==> Create Update Part in dashboard.js
+- OPEN
+==> Create ability to seach existing parts and select a part to update_part to update_part
+- OPEN
+== Create ability to update part
+
+
+http://localhost:8090/dashboard
+
+==> Remove BOM from header or specify its purpose in the Technical Specifications
+- OPEN
+
+
+http://localhost:8090/success
+==> Logout works as expected, write a Test to show it works 
+- OPEN
+

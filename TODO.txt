@@ -13,7 +13,7 @@ e.g. Part must have a name and a specification link, but nDesscription is option
 http://localhost:8090/update_part
 
 ==> Create Update Part in dashboard.js
-- OPEN
+- DONE 
 ==> Create form method="post" action="/update_new_part" 
 -OPEN
 ==> Create ability to seach existing parts and select a part to update_part to update_part

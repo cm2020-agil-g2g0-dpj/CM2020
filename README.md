@@ -8,3 +8,9 @@ MVP1 Scope
 ->Implement a database to provide context for specific drawings (for instance, tied parts, inventory information, physical characteristics of parts, part replacement counts, issues notes, last change).
 ->Implement aggregation of data (provide aggregation functionality for related parts).
 ->Implement User Interface
+
+HOW TO RUN
+
+1. In XAMPP start Apache and MySQL
+2. In VSCode terminal run: node index.js
+3. Open localhost:8090

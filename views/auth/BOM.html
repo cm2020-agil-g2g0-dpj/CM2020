@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>
+        <%= title %> | Welcome to PLM</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- Google fonts library. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div id="header" class="containter">
+            <div id="mainMenu" class="container-fluid border-top border-bottom">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <div class="container">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <nav>
+                                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-3">
+                                    <li class="nav-item pe-lg-4">
+                                        <a class="nav-link" aria-current="page" href="dashboard">HOME</a>
+                                    </li>
+                                    <li class="nav-item pe-lg-4">
+                                        <a class="nav-link" href="#">BOM</a>
+                                    </li>
+                                    <li class="nav-item dropdown pe-lg-4">
+                                        <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">PART MANAGEMENT</a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <li><a class="dropdown-item" href="create_part">CREATE PART</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li><a class="dropdown-item" href="update_part">UPDATE PART</a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item pe-lg-4">
+                                        <a class="nav-link" href="logout">LOGOUT</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div id="main-logo" class="container-fluid"></div>
+            <div class="row row-cols-3 g-2 mb-3">
+                <div id="logo" class="col text-left">
+                    <!-- Using bootstrap padding utility class. -->
+                    <div class="p-3">
+                        <!-- Logo 
+                    <a href="/"><img src="" class="logo img-fluid" alt=""></a>
+                -->
+                    </div>
+                </div>
+                <div class="col">
+                </div>
+                <div class="col">
+                </div>
+            </div>
+        </div>
+        </div>
+    </header>
+
+    <!-- Spreadsheet -->
+    <div id="main" class="container">
+        <table class="table">
+            <thead>
+              <tr>
+                <!-- Should show all components of current assembly -->
+                <!-- Drop down to allow for query of all components of subassembly -->
+                <th scope="col">#</th>
+                <th scope="col">Part Number</th>
+                <th scope="col">Part Name</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Revision</th>                
+                <th scope="col">Part Design Status</th>
+                <th scope="col">Part Owner</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <th scope="row">1-1000</th>
+                <th scope="row">Handle Body</th>
+                <th scope="row">1</th>
+                <th scope="row"></th>                
+                <th scope="row">Issued, revision in work</th>
+                <th scope="row">jibin</th>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <th scope="row">2-1000</th>
+                <th scope="row">Screw</th>
+                <th scope="row">4</th>
+                <th scope="row"></th>                
+                <th scope="row">Issued</th>
+                <th scope="row">jibin</th>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <th scope="row">2-1001</th>
+                <th scope="row">Washer</th>
+                <th scope="row">4</th>
+                <th scope="row"></th>                
+                <th scope="row">Issued</th>
+                <th scope="row">jibin</th>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+
+    <footer>
+        <div class="container-fluid border-top mt-5">
+            <div id="footerbottom" class="row row-cols-1 g-2">
+                <div class="col text-center">
+                    <div class="pt-5">
+                        <p>&copy; 2022 | All Rights Reserved</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

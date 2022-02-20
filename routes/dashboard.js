@@ -31,6 +31,20 @@ module.exports = function(app) {
         }
     });
 
+    app.get('/BOM', function(req, res) {
+        if (req.session.loggedin) {
+            res.render('auth/BOM.html', {
+                title: "Update Part",
+                name: req.session.name,
+            });
+
+        } else {
+
+            req.flash('error', 'Please login first!');
+            res.redirect('/');
+        }
+    });
+
 
     app.post("/create_new_part",
         body('p_name').not().isEmpty().trim().escape(),

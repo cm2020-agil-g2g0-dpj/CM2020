@@ -1,8 +1,31 @@
 const { body, validationResult } = require('express-validator');
-
 module.exports = function(app) {
 
-    //display home page
+    //display parts page
+    app.get('/list_part', function(req, res) {
+        if (req.session.loggedin) {
+            // sql query
+            let sqlquery = "SELECT * FROM parts";
+            // execute sql query
+            db.query(sqlquery, (err, result) => {
+                if(err) {
+                    return console.error(err.message);
+                }
+                else {
+                    res.render('auth/list_part.html', {
+                        title: "List Part",
+                        name: req.session.name,
+                        allParts: result
+                    });
+                }
+            });
+        } else {
+
+            req.flash('error', 'Please login first!');
+            res.redirect('/');
+        }
+    });
+
     app.get('/create_part', function(req, res) {
         if (req.session.loggedin) {
             res.render('auth/create_part.html', {

@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+    <title>Failed | Welcome to PLM</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<!-- Google fonts library. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">    
+</head>
+<body>
+<header>
+ <div id="header" class="containter">
+    <div id="main-logo" class="container-fluid"></div>
+        <div class="row row-cols-3 g-2 mb-3">
+            <div id="logo" class="col text-left">
+                <!-- Using bootstrap padding utility class. -->
+                <div class="p-3">
+                <!-- Logo 
+                    <a href="/"><img src="images/msh_logo.png" class="logo img-fluid" alt="Logo of MySmartHome"></a>
+                -->
+                </div>
+            </div>
+            <div class="col">
+            </div>
+            <div class="col">
+            </div>
+        </div>
+    </div>
+ </div>
+</header>
+<div id="main" class="container">
+    <div class="container overflow-hidden">
+        <div id="main_success" class="row row-cols-1 row-cols-md-3 g-2">
+            <div class="col-md-4">
+                <div class="p-3 main-heading"></div>
+            </div>
+            <div class="col-md-4 mt-5">
+                <div class="main-heading text-center">
+                  <h3>Error : </h3>
+                  <% if (messages.error) { %>
+                    <p style="color:red"><%= messages.error %></p>
+                  <% } %>
+                  <p><a href="dashboard">Dashboard</a></p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-3 main-heading"></div>
+            </div>
+        </div>     
+    </div>
+</div>
+<footer>
+    <div class="container-fluid border-top mt-5">
+        <div id = "footerbottom" class="row row-cols-1 g-2">
+          <div class="col text-center">
+            <div class="pt-5">
+                <p>&copy; 2022 | All Rights Reserved</p>
+            </div>
+          </div>
+       </div>
+    </div>
+</footer>
+<script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

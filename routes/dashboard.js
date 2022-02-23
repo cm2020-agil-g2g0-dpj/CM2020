@@ -42,13 +42,48 @@ module.exports = function(app) {
 
     app.get('/update_part', function(req, res) {
         if (req.session.loggedin) {
-            res.render('auth/update_part.html', {
-                title: "Update Part",
-                name: req.session.name,
+            let part_id = req.query.id;
+            let sqlquery = "SELECT * FROM parts WHERE Part_ID=?";
+            db.query(sqlquery, part_id, (err, result) => {
+                if (err) {
+                    // return console.error(err.message);
+                    req.flash('error', err.message);
+                    res.redirect('/fail');
+                }
+                else {
+                    res.render('auth/update_part.html', {
+                        title: "Update Part",
+                        name: req.session.name,
+                        partData: result
+                    });
+                }
             });
-
         } else {
 
+            req.flash('error', 'Please login first!');
+            res.redirect('/');
+        }
+    });
+
+    app.get('/view_part', function(req, res) {
+        if (req.session.loggedin) {
+            let part_id = req.query.id;
+            let sqlquery = "SELECT * FROM parts WHERE Part_ID=?";
+            db.query(sqlquery, part_id, (err, result) => {
+                if (err) {
+                    // return console.error(err.message);
+                    req.flash('error', err.message);
+                    res.redirect('/fail');
+                }
+                else {
+                    res.render('auth/view_part.html', {
+                        title: "View Part",
+                        name: req.session.name,
+                        partData: result
+                    });
+                }
+            });
+        } else {
             req.flash('error', 'Please login first!');
             res.redirect('/');
         }
@@ -67,7 +102,6 @@ module.exports = function(app) {
             res.redirect('/');
         }
     });
-
 
     app.post("/create_new_part",
         body('p_name').not().isEmpty().trim().escape(),
@@ -115,8 +149,22 @@ module.exports = function(app) {
                         });
                     }
                 });
-
             }
         });
+
+    //display home page
+    app.get('/fail', function(req, res) {
+        if (req.session.loggedin) {
+            res.render('auth/fail.html', {
+                title:"Failed",
+                name: req.session.name,     
+            });
+ 
+        } else {
+ 
+        req.flash('error', 'Please login first!');
+        res.redirect('/');
+        }
+    });
 
 }

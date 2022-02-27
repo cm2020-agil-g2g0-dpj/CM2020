@@ -87,6 +87,7 @@
                         <div class="mb-3">
                             <label for="p_name" class="form-label">Part Name</label>
                             <input type="text" name="p_name" id="p_name" class="form-control" required />
+                            <input type="hidden" name="user_id" id="user_id" value="<%= name %>" />
                         </div>
                         <div class="mb-3">
                             <label for="p_spec_link" class="form-label">Part Specification Link</label>
@@ -108,9 +109,9 @@
                             <label for="p_status" class="form-label">Part Design Status</label>
                             <select class="form-select" id="p_status" name="p_status" aria-label="Part Design Status" required>
                                 <option selected disabled value="">Part Status</option>      
-                                <option value="1">Status 1</option>
-                                <option value="2">Status 2</option>
-                                <option value="3">Status 3</option>
+                                <option value="1">Issued</option>
+                                <option value="2">Issued - Revision not started</option>
+                                <option value="3">Issued - Revision in work</option>
                               </select>                        
                         </div>
                         <div class="mb-4">

@@ -87,7 +87,7 @@
                 </div>
                 <div class="col-md-6 border">
                     <div class="p-4 main-heading text-left">
-                        <h3 class="mt-3 text-center"><a>EDIT PART : <%= partData[0].Part_Name %></a></h3>
+                        <h3 class="mt-3 text-center"><a>VIEW PART : <%= partData[0].Part_Name %></a></h3>
                         <% if (messages.error) { %>
                             <p style="color:red">
                                 <%= messages.error %>
@@ -98,44 +98,27 @@
                                         <%= messages.success %>
                                     </p>
                                     <% } %>
-                                        <form method="post" action="/update_new_part">
                                             <div class="mb-3">
-                                                <label for="p_name" class="form-label">Part Name</label>
-                                                <input type="hidden" value="<%= partData[0].Part_ID %>" name="part_id" id="part_id" />
-                                                <input type="text" name="p_name" id="p_name" value="<%= partData[0].Part_Name %>" class="form-control" required />
+                                                <label for="p_name" class="form-label">Part Name: <%= partData[0].Part_Name %></label>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="p_spec_link" class="form-label">Part Specification Link</label>
-                                                <input type="text" name="p_spec_link" id="p_spec_link" value="<%= partData[0].Part_Specification_Link %>" class="form-control" required />
+                                                <label for="p_spec_link" class="form-label">Part Specification Link: <%= partData[0].Part_Specification_Link %></label>
                                             </div>
                                             <div class="mb-4">
-                                                <label for="p_description" class="form-label">Part Description</label>
-                                                <textarea class="form-control" id="p_description" name="p_description" rows="3" required><%= partData[0].Part_Description %>
-                                                </textarea>
+                                                <label for="p_description" class="form-label">Part Description: <%= partData[0].Part_Description %></label>
                                             </div>
                                             <div class="mb-4">
-                                                <label for="p_issues" class="form-label">Part Issue</label>
-                                                <textarea class="form-control" id="p_issues" name="p_issues" rows="3" required><%= partData[0].Part_Issues %>
-                                                </textarea>
+                                                <label for="p_issues" class="form-label">Part Issue: <%= partData[0].Part_Issues %></label>
                                             </div>
                                             <div class="mb-4">
-                                                <label for="p_notes" class="form-label">Part Notes</label>
-                                                <textarea class="form-control" id="p_notes" name="p_notes" rows="3" required><%= partData[0].Part_Notes %>
-                                                </textarea>
+                                                <label for="p_notes" class="form-label">Part Notes: <%= partData[0].Part_Notes %></label>
                                             </div>
                                             <div class="mb-4">
-                                                <label for="p_status" class="form-label">Part Design Status</label>
-                                                <select class="form-select" id="p_status" name="p_status" aria-label="Part Design Status" required>
-                                <option selected disabled value="">Part Status</option>      
-                                <option value="1">Status 1</option>
-                                <option value="2">Status 2</option>
-                                <option value="3">Status 3</option>
-                              </select>
+                                                <label for="p_status" class="form-label">Part Design Status: <%= partData[0].Part_Design_Status %></label>
                                             </div>
                                             <div class="mb-4">
-                                                <button type="submit" class="btn btn-primary btn-block form-control">CREATE PART</button>
                                             </div>
-                                        </form>
+                                        
                     </div>
                 </div>
                 <div class="col-md-3">

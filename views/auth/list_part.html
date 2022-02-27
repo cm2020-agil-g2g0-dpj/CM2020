@@ -2,8 +2,7 @@
 <html>
 
 <head>
-    <title>
-        <%= title %> | Welcome to PLM</title>
+    <title><%= title %> | Welcome to PLM</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <!-- Google fonts library. -->
@@ -77,50 +76,49 @@
 
     <!-- Spreadsheet -->
     <div id="main" class="container">
-        <table class="table">
-            <thead>
-              <tr>
-                <!-- Should show all components of current assembly -->
-                <!-- Drop down to allow for query of all components of subassembly -->
-                <th scope="col">#</th>
-                <th scope="col">Part Number</th>
-                <th scope="col">Part Name</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Revision</th>                
-                <th scope="col">Part Design Status</th>
-                <th scope="col">Part Owner</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <th scope="row">1-1000</th>
-                <th scope="row">Handle Body</th>
-                <th scope="row">1</th>
-                <th scope="row"></th>                
-                <th scope="row">Issued, revision in work</th>
-                <th scope="row">jibin</th>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <th scope="row">2-1000</th>
-                <th scope="row">Screw</th>
-                <th scope="row">4</th>
-                <th scope="row"></th>                
-                <th scope="row">Issued</th>
-                <th scope="row">jibin</th>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <th scope="row">2-1001</th>
-                <th scope="row">Washer</th>
-                <th scope="row">4</th>
-                <th scope="row"></th>                
-                <th scope="row">Issued</th>
-                <th scope="row">jibin</th>
-              </tr>
-            </tbody>
-          </table>
+        <div class="container overflow-hidden">
+            <div class="row g-2 mt-5">
+                <div class="col-sm-1">
+                  <b>ID</b>
+                </div>
+                <div class="col-sm-2">
+                  <b>Part Name</b>
+                </div>
+                <div class="col-sm-3">
+                  <b>Created Date</b>
+                </div>
+                <div class="col-sm-3">
+                  <b>Design Status</b>
+                </div>
+                <div class="col-sm-3">
+                   <b>Action</b>
+                </div>
+                <% var counter = 0; 
+                allParts.forEach(function(part){ counter++; %> 
+                <div class="col-sm-1">
+                    <%= counter %>
+                </div>
+                <div class="col-sm-2">
+                    <%= part.Part_Name %>
+                </div>
+                <div class="col-sm-3">
+                    <%= part.Part_Created_Date.toISOString().slice(0, 19) %>
+                </div>
+                <div class="col-sm-3">
+                    <%= part.Part_Design_Status %> 
+                </div>
+                <div class="col-sm-3">
+                    <a href=view_part?id=<%= part.Part_ID %> >
+                        VIEW
+                    </a>
+                    |
+                    <a href=update_part?id=<%= part.Part_ID %> >
+                        EDIT
+                    </a>
+                </div>
+                <% }) %> 
+            </div>
+        </div>
     </div>
 
     <footer>

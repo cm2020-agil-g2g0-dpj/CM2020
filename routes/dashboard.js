@@ -8,10 +8,9 @@ module.exports = function(app) {
             let sqlquery = "SELECT * FROM parts";
             // execute sql query
             db.query(sqlquery, (err, result) => {
-                if(err) {
+                if (err) {
                     return console.error(err.message);
-                }
-                else {
+                } else {
                     res.render('auth/list_part.html', {
                         title: "List Part",
                         name: req.session.name,
@@ -49,8 +48,7 @@ module.exports = function(app) {
                     // return console.error(err.message);
                     req.flash('error', err.message);
                     res.redirect('/fail');
-                }
-                else {
+                } else {
                     res.render('auth/update_part.html', {
                         title: "Update Part",
                         name: req.session.name,
@@ -74,8 +72,7 @@ module.exports = function(app) {
                     // return console.error(err.message);
                     req.flash('error', err.message);
                     res.redirect('/fail');
-                }
-                else {
+                } else {
                     res.render('auth/view_part.html', {
                         title: "View Part",
                         name: req.session.name,
@@ -93,6 +90,21 @@ module.exports = function(app) {
         if (req.session.loggedin) {
             res.render('auth/BOM.html', {
                 title: "Update Part",
+                name: req.session.name,
+            });
+
+        } else {
+
+            req.flash('error', 'Please login first!');
+            res.redirect('/');
+        }
+    });
+
+
+    app.get('/HELP', function(req, res) {
+        if (req.session.loggedin) {
+            res.render('auth/Help.html', {
+                title: "Help",
                 name: req.session.name,
             });
 
@@ -156,14 +168,14 @@ module.exports = function(app) {
     app.get('/fail', function(req, res) {
         if (req.session.loggedin) {
             res.render('auth/fail.html', {
-                title:"Failed",
-                name: req.session.name,     
+                title: "Failed",
+                name: req.session.name,
             });
- 
+
         } else {
- 
-        req.flash('error', 'Please login first!');
-        res.redirect('/');
+
+            req.flash('error', 'Please login first!');
+            res.redirect('/');
         }
     });
 

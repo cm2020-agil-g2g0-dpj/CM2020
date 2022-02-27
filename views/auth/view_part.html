@@ -30,11 +30,14 @@
                                     <li class="nav-item pe-lg-4">
                                         <a class="nav-link" href="#">BOM</a>
                                     </li>
+                                    <li class="nav-item pe-lg-4">
+                                        <a class="nav-link" href="help">HELP</a>
+                                    </li>
                                     <li class="nav-item dropdown pe-lg-4">
                                         <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">PART MANAGEMENT</a>
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                             <li>
-                                                <a class="dropdown-item" href="list_part">LIST PART</a>  
+                                                <a class="dropdown-item" href="list_part">LIST PART</a>
                                             </li>
                                             <li>
                                                 <hr class="dropdown-divider">
@@ -98,27 +101,27 @@
                                         <%= messages.success %>
                                     </p>
                                     <% } %>
-                                            <div class="mb-3">
-                                                <label for="p_name" class="form-label">Part Name: <%= partData[0].Part_Name %></label>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="p_spec_link" class="form-label">Part Specification Link: <%= partData[0].Part_Specification_Link %></label>
-                                            </div>
-                                            <div class="mb-4">
-                                                <label for="p_description" class="form-label">Part Description: <%= partData[0].Part_Description %></label>
-                                            </div>
-                                            <div class="mb-4">
-                                                <label for="p_issues" class="form-label">Part Issue: <%= partData[0].Part_Issues %></label>
-                                            </div>
-                                            <div class="mb-4">
-                                                <label for="p_notes" class="form-label">Part Notes: <%= partData[0].Part_Notes %></label>
-                                            </div>
-                                            <div class="mb-4">
-                                                <label for="p_status" class="form-label">Part Design Status: <%= partData[0].Part_Design_Status %></label>
-                                            </div>
-                                            <div class="mb-4">
-                                            </div>
-                                        
+                                        <div class="mb-3">
+                                            <label for="p_name" class="form-label">Part Name: <%= partData[0].Part_Name %></label>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="p_spec_link" class="form-label">Part Specification Link: <%= partData[0].Part_Specification_Link %></label>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label for="p_description" class="form-label">Part Description: <%= partData[0].Part_Description %></label>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label for="p_issues" class="form-label">Part Issue: <%= partData[0].Part_Issues %></label>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label for="p_notes" class="form-label">Part Notes: <%= partData[0].Part_Notes %></label>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label for="p_status" class="form-label">Part Design Status: <%= partData[0].Part_Design_Status %></label>
+                                        </div>
+                                        <div class="mb-4">
+                                        </div>
+
                     </div>
                 </div>
                 <div class="col-md-3">

@@ -34,12 +34,13 @@ module.exports = function (app) {
                 req.flash('error', err);
                 res.redirect('/');
             } else if(result.length <= 0) {
-                req.flash('error', 'Please correct enter email and Password!');
+                req.flash('error', 'Please enter the correct Username and Password!');
                 res.redirect('/');
             }
             else {
                 req.session.loggedin = true;
-                req.session.name = req.body.username;
+                req.session.name = result[0]['name'];
+                req.session.id = result[0]['user_id'];
                 res.redirect('dashboard');
             }
             });

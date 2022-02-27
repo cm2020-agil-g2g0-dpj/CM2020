@@ -46,7 +46,6 @@ module.exports = function(app) {
             let sqlquery = "SELECT * FROM parts WHERE Part_ID=?";
             db.query(sqlquery, part_id, (err, result) => {
                 if (err) {
-                    // return console.error(err.message);
                     req.flash('error', err.message);
                     res.redirect('/fail');
                 }
@@ -71,7 +70,6 @@ module.exports = function(app) {
             let sqlquery = "SELECT * FROM parts WHERE Part_ID=?";
             db.query(sqlquery, part_id, (err, result) => {
                 if (err) {
-                    // return console.error(err.message);
                     req.flash('error', err.message);
                     res.redirect('/fail');
                 }
@@ -134,14 +132,13 @@ module.exports = function(app) {
                         res.redirect('/create_part')
                     } else {
                         let timestamp = Date.now();
-                        let sqlquery_b = "INSERT INTO parts (part_name,part_specification_link,part_description,part_issues,part_notes,part_design_status) VALUES (?,?,?,?,?,?)";
+                        let sqlquery_b = "INSERT INTO parts (Part_Name,Part_Description,Part_Specification_Link,Part_Issues,Part_Notes,Part_Design_Status,Part_owner) VALUES (?,?,?,?,?,?,?)";
                         // execute sql query
-                        let new_part = [req.body.p_name, req.body.p_spec_link, req.body.p_description, req.body.p_issues, req.body.p_notes, req.body.p_status];
+                        let new_part = [req.body.p_name, req.body.p_spec_link, req.body.p_description, req.body.p_issues, req.body.p_notes, req.body.p_status, req.body.user_id];
                         db.query(sqlquery_b, new_part, (err, result) => {
                             if (err) {
-                                console.log(err);
-                                req.flash('error', err.array())
-                                res.redirect('/create_part')
+                                req.flash('error', err.message);
+                                res.redirect('/fail');
                             } else {
                                 req.flash('success', 'You have successfully added a new part!');
                                 res.redirect('/create_part');

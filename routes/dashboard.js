@@ -64,6 +64,41 @@ module.exports = function(app) {
         }
     });
 
+    app.post("/update_new_part",
+    body('p_name').not().isEmpty().trim().escape(),
+    body('p_spec_link').not().isEmpty().trim().escape(),
+    body('p_description').not().isEmpty().trim().escape(),
+    body('p_issues').not().isEmpty().trim().escape(),
+    body('p_notes').not().isEmpty().trim().escape(),
+    body('p_status').not().isEmpty().trim().escape(),
+    function(req, res) {
+        // express validation
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            var error_msg = '';
+            errors.array().forEach(function(error) {
+                error_msg += error.msg;
+            })
+            req.flash('error', error_msg);
+            res.redirect('/update_part');
+        }
+        // saving data in database
+        else {
+            let sqlquery_b = "UPDATE parts SET Part_Name=?,Part_Description=?,Part_Specification_Link=?,Part_Issues=?,Part_Notes=?,Part_Design_Status=? WHERE Part_ID=?";
+            // execute sql query
+            let new_part = [req.body.p_name, req.body.p_description, req.body.p_spec_link, req.body.p_issues, req.body.p_notes, req.body.p_status, req.body.part_id];
+            db.query(sqlquery_b, new_part, (err, result) => {
+                if (err) {
+                    req.flash('error', err.message);
+                    res.redirect('/fail');
+                } else {
+                    req.flash('success', 'You have successfully updated the part!');
+                    res.redirect('/update_success');
+                }
+            });
+        }
+    });
+
     app.get('/view_part', function(req, res) {
         if (req.session.loggedin) {
             let part_id = req.query.id;
@@ -134,7 +169,7 @@ module.exports = function(app) {
                         let timestamp = Date.now();
                         let sqlquery_b = "INSERT INTO parts (Part_Name,Part_Description,Part_Specification_Link,Part_Issues,Part_Notes,Part_Design_Status,Part_owner) VALUES (?,?,?,?,?,?,?)";
                         // execute sql query
-                        let new_part = [req.body.p_name, req.body.p_spec_link, req.body.p_description, req.body.p_issues, req.body.p_notes, req.body.p_status, req.body.user_id];
+                        let new_part = [req.body.p_name, req.body.p_description, req.body.p_spec_link, req.body.p_issues, req.body.p_notes, req.body.p_status, req.body.user_id];
                         db.query(sqlquery_b, new_part, (err, result) => {
                             if (err) {
                                 req.flash('error', err.message);
@@ -149,7 +184,7 @@ module.exports = function(app) {
             }
         });
 
-    //display home page
+    //display error page
     app.get('/fail', function(req, res) {
         if (req.session.loggedin) {
             res.render('auth/fail.html', {
@@ -158,10 +193,21 @@ module.exports = function(app) {
             });
  
         } else {
- 
         req.flash('error', 'Please login first!');
         res.redirect('/');
         }
     });
 
+    //display success page
+    app.get('/update_success', function(req, res) {
+        if (req.session.loggedin) {
+            res.render('auth/success.html', {
+                title:"Success",
+                name: req.session.name,     
+            });
+        } else {
+        req.flash('error', 'Please login first!');
+        res.redirect('/');
+        }
+    });
 }

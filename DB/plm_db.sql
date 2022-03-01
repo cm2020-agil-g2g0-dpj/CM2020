@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 13, 2022 at 03:15 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.1.1
+-- Generation Time: Mar 01, 2022 at 08:35 PM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 7.4.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -40,7 +40,7 @@ CREATE TABLE `assemblies` (
 --
 
 INSERT INTO `assemblies` (`Index`, `Assembly_ID`, `Part_ID`, `Revision_ID`, `Part_Quantity`) VALUES
-(6, 7, 0, 1, 1),
+(6, 7, 1, 1, 1),
 (7, 7, 1, 1, 2),
 (8, 7, 2, 1, 2),
 (12, 8, 3, 2, 1),
@@ -61,31 +61,34 @@ INSERT INTO `assemblies` (`Index`, `Assembly_ID`, `Part_ID`, `Revision_ID`, `Par
 CREATE TABLE `parts` (
   `Part_ID` int(11) NOT NULL,
   `Part_Name` text NOT NULL,
-  `Part_Created_Date` date NOT NULL,
+  `Part_Created_Date` date NOT NULL DEFAULT current_timestamp(),
   `Part_Description` text NOT NULL,
   `Part_Specification_Link` text NOT NULL,
   `Part_Issues` text NOT NULL,
   `Part_Notes` text NOT NULL,
   `Part_Design_Status` text NOT NULL,
-  `Part_owner` int(11) NOT NULL
+  `Part_Owner` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `parts`
 --
 
-INSERT INTO `parts` (`Part_ID`, `Part_Name`, `Part_Created_Date`, `Part_Description`, `Part_Specification_Link`, `Part_Issues`, `Part_Notes`, `Part_Design_Status`, `Part_owner`) VALUES
-(0, '1-1000', '2022-02-15', 'Handle body', '', 'Handle cracking', '', 'Issued, revision in work', 1),
-(1, '2-1000', '2022-02-13', 'Screw', '', '', '', 'Issued', 1),
-(2, '2-1001', '2022-02-13', 'Washer', '', '', '', 'Issued', 1),
-(3, '1-1001', '2022-02-13', 'Door', '', '', 'Looking for alternative material', 'Issued, revision in work', 6),
-(4, '2-1002', '2022-02-13', 'Hinge', '', 'Hinge sticking', '', 'Issued, revision not started', 6),
-(5, '2-1003', '2022-02-13', 'Screw', '', '', '', 'Issued', 6),
-(6, '1-1003', '2022-02-13', 'Cabinet body', '', '', '', 'Issued', 8),
-(7, '0-1000', '2022-02-13', 'Handle Assembly', '', '', '', 'Issued', 9),
-(8, '0-1001', '2022-02-13', 'Door Assembly', '', '', 'Changing alignment of hinge', 'Issued, revision in work', 9),
-(9, '0-1002', '2022-02-13', 'Cabinet with Door', '', '', '', 'Issued', 9),
-(10, '0-1003', '2022-02-13', 'Cabinet with handle', '', '', '', 'Issued', 8);
+INSERT INTO `parts` (`Part_ID`, `Part_Name`, `Part_Created_Date`, `Part_Description`, `Part_Specification_Link`, `Part_Issues`, `Part_Notes`, `Part_Design_Status`, `Part_Owner`) VALUES
+(1, '1-1000', '2022-02-15', 'Handle body', '', 'Handle cracking', '', 'Issued, revision in work', 1),
+(2, '2-1000', '2022-02-13', 'Screw', '', '', '', 'Issued', 1),
+(3, '2-1001', '2022-02-13', 'Washer', '', '', '', 'Issued', 1),
+(4, '1-1001', '2022-02-13', 'Door', '', '', 'Looking for alternative material', 'Issued, revision in work', 6),
+(5, '2-1002', '2022-02-13', 'Hinge', '', 'Hinge sticking', '', 'Issued, revision not started', 6),
+(6, '2-1003', '2022-02-13', 'Screw', '', '', '', 'Issued', 6),
+(7, '1-1003', '2022-02-13', 'Cabinet body', '', '', '', 'Issued', 8),
+(8, '0-1000', '2022-02-13', 'Handle Assembly', '', '', '', 'Issued', 9),
+(9, '0-1001', '2022-02-13', 'Door Assembly', '', '', 'Changing alignment of hinge', 'Issued, revision in work', 9),
+(10, '0-1002', '2022-02-13', 'Cabinet with Door', '', '', '', 'Issued', 9),
+(11, '0-1003', '2022-02-13', 'Cabinet with handle', '', '', '', 'Issued', 8),
+(16, '1-1004', '2022-03-02', 'Part Description', 'Part Specification Link', 'Part Issue', 'Part Notes', 'Issued', 1),
+(17, '4-1003', '2022-03-02', 'Part Description', 'Part Specification Link 4', 'Part Issue', 'Part Notes', 'Issued - Revision not started', 1),
+(18, '1-1005', '2022-03-02', 'Part Description', 'Part Specification Link 5', 'Part Issue', 'Part Notes', 'Issued', 1);
 
 -- --------------------------------------------------------
 
@@ -145,8 +148,8 @@ ALTER TABLE `assemblies`
 ALTER TABLE `parts`
   ADD PRIMARY KEY (`Part_ID`),
   ADD KEY `Part_Name` (`Part_Name`(768)),
-  ADD KEY `part_owner` (`Part_owner`),
-  ADD KEY `part_owner_2` (`Part_owner`);
+  ADD KEY `part_owner` (`Part_Owner`),
+  ADD KEY `part_owner_2` (`Part_Owner`);
 
 --
 -- Indexes for table `revision_history`
@@ -175,6 +178,12 @@ ALTER TABLE `assemblies`
   MODIFY `Index` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
+-- AUTO_INCREMENT for table `parts`
+--
+ALTER TABLE `parts`
+  MODIFY `Part_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
 -- AUTO_INCREMENT for table `revision_history`
 --
 ALTER TABLE `revision_history`
@@ -194,8 +203,8 @@ ALTER TABLE `users`
 -- Constraints for table `assemblies`
 --
 ALTER TABLE `assemblies`
-  ADD CONSTRAINT `assemblies_ibfk_1` FOREIGN KEY (`Part_ID`) REFERENCES `parts` (`Part_ID`),
-  ADD CONSTRAINT `assemblies_ibfk_2` FOREIGN KEY (`Assembly_ID`) REFERENCES `parts` (`Part_ID`);
+  ADD CONSTRAINT `assemblyid` FOREIGN KEY (`Assembly_ID`) REFERENCES `parts` (`Part_ID`),
+  ADD CONSTRAINT `partid` FOREIGN KEY (`Part_ID`) REFERENCES `parts` (`Part_ID`);
 
 --
 -- Constraints for table `parts`
@@ -207,7 +216,6 @@ ALTER TABLE `parts`
 -- Constraints for table `revision_history`
 --
 ALTER TABLE `revision_history`
-  ADD CONSTRAINT `revision_history_ibfk_1` FOREIGN KEY (`Part_ID`) REFERENCES `parts` (`Part_ID`),
   ADD CONSTRAINT `revision_history_ibfk_2` FOREIGN KEY (`Approved_by`) REFERENCES `users` (`user_id`),
   ADD CONSTRAINT `revision_history_ibfk_3` FOREIGN KEY (`Revision_ID`) REFERENCES `assemblies` (`Revision_ID`);
 COMMIT;

@@ -110,26 +110,23 @@
                                             </div>
                                             <div class="mb-4">
                                                 <label for="p_description" class="form-label">Part Description</label>
-                                                <textarea class="form-control" id="p_description" name="p_description" rows="3" required><%= partData[0].Part_Description %>
-                                                </textarea>
+                                                <textarea class="form-control" id="p_description" name="p_description" rows="3" required><%= partData[0].Part_Description %></textarea>
                                             </div>
                                             <div class="mb-4">
                                                 <label for="p_issues" class="form-label">Part Issue</label>
-                                                <textarea class="form-control" id="p_issues" name="p_issues" rows="3" required><%= partData[0].Part_Issues %>
-                                                </textarea>
+                                                <textarea class="form-control" id="p_issues" name="p_issues" rows="3" required><%= partData[0].Part_Issues %></textarea>
                                             </div>
                                             <div class="mb-4">
                                                 <label for="p_notes" class="form-label">Part Notes</label>
-                                                <textarea class="form-control" id="p_notes" name="p_notes" rows="3" required><%= partData[0].Part_Notes %>
-                                                </textarea>
+                                                <textarea class="form-control" id="p_notes" name="p_notes" rows="3" required><%= partData[0].Part_Notes %></textarea>
                                             </div>
                                             <div class="mb-4">
                                                 <label for="p_status" class="form-label">Part Design Status</label>
                                                 <select class="form-select" id="p_status" name="p_status" aria-label="Part Design Status" required>
-                                <option selected disabled value="">Part Status</option>      
-                                <option value="1">Status 1</option>
-                                <option value="2">Status 2</option>
-                                <option value="3">Status 3</option>
+                                                    <option selected disabled value="">Part Status</option>      
+                                                    <option value="Issued">Issued</option>
+                                                    <option value="Issued - Revision not started">Issued - Revision not started</option>
+                                                    <option value="Issued - Revision in work">Issued - Revision in work</option>
                               </select>
                                             </div>
                                             <div class="mb-4">

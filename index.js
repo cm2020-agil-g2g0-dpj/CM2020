@@ -11,6 +11,7 @@ const app = express();
 const mysql = require("mysql");
 const port = 8090;
 
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
 app.use(express.static('public'));

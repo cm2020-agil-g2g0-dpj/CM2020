@@ -82,55 +82,70 @@
         </div>
         </div>
     </header>
-
-    <!-- Spreadsheet -->
     <div id="main" class="container">
-        <table class="table">
-            <thead>
-              <tr>
-                <!-- Should show all components of current assembly -->
-                <!-- Drop down to allow for query of all components of subassembly -->
-                <th scope="col">#</th>
-                <th scope="col">Part Number</th>
-                <th scope="col">Part Name</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Revision</th>                
-                <th scope="col">Part Design Status</th>
-                <th scope="col">Part Owner</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <th scope="row">1-1000</th>
-                <th scope="row">Handle Body</th>
-                <th scope="row">1</th>
-                <th scope="row"></th>                
-                <th scope="row">Issued, revision in work</th>
-                <th scope="row">jibin</th>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <th scope="row">2-1000</th>
-                <th scope="row">Screw</th>
-                <th scope="row">4</th>
-                <th scope="row"></th>                
-                <th scope="row">Issued</th>
-                <th scope="row">jibin</th>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <th scope="row">2-1001</th>
-                <th scope="row">Washer</th>
-                <th scope="row">4</th>
-                <th scope="row"></th>                
-                <th scope="row">Issued</th>
-                <th scope="row">jibin</th>
-              </tr>
-            </tbody>
-          </table>
-    </div>
+        <div class="container overflow-hidden">
 
+            <div id="main_home" class="row row-cols-1 row-cols-md-3 g-2">
+                <div class="col-md-3">
+                    <div class="p-3 main-heading">
+                        <p>Welcome
+                            <%= name %>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6 border">
+                    <div class="p-4 main-heading text-left">
+                        <h3 class="mt-3 text-center"><a>EDIT USER</a></h3>
+                            <% if (messages.error) { %>
+                            <p style="color:red">
+                                <%= messages.error %>
+                            </p>
+                            <% } %>
+                                <% if (messages.success) { %>
+                                    <p style="color:green">
+                                        <%= messages.success %>
+                                    </p>
+                                    <% } %>
+                                        <form method="post" action="/update_new_user">
+                                            <div class="mb-3">
+                                                <label for="u_name" class="form-label">Name</label>
+                                                <input type="hidden" value="<%= userData[0].user_id %>" name="user_id" id="user_id" />
+                                                <input type="text" name="full_name" id="full_name" value="<%= userData[0].name %>" class="form-control" required />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="email" class="form-label">Email</label>
+                                                <input type="text" name="email" id="email" value="<%= userData[0].email %>" class="form-control" required />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="full_name" class="form-label">Username</label>
+                                                <input type="text" name="u_name" id="u_name" value="<%= userData[0].username %>" class="form-control" required />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="p_status" class="form-label">Role</label>
+                                                <select class="form-select" id="p_status" name="p_status" aria-label="Part Design Status" required>
+                                                    <option selected disabled value="">Select Role</option>      
+                                                    <option value="1">Admin</option>
+                                                    <option value="2">Editor</option>
+                                                    <option value="3">Basic</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="p_issues" class="form-label">Password -</label>
+                                                <a>Click here to change</a>
+                                            </div>
+                                            <div class="mb-4">
+                                                <button type="submit" class="btn btn-primary btn-block form-control">UPDATE USER</button>
+                                            </div>
+                                        </form>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="p-3 main-heading"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
     <footer>
         <div class="container-fluid border-top mt-5">
             <div id="footerbottom" class="row row-cols-1 g-2">

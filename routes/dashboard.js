@@ -191,6 +191,79 @@ module.exports = function(app) {
             }
         });
 
+    // manage users
+    app.get('/manage_users', function(req, res) {
+        if (req.session.loggedin) {
+            // sql query
+            let sqlquery = "SELECT * FROM users";
+            // execute sql query
+            db.query(sqlquery, (err, result) => {
+                if(err) {
+                    req.flash('error', err.message);
+                    res.redirect('/fail');
+                }
+                else {
+                    res.render('auth/manage_users.html', {
+                        title: "Manage Users",
+                        name: req.session.name,
+                        allUsers: result
+                    });
+                }
+            });
+        } else {
+
+            req.flash('error', 'Please login first!');
+            res.redirect('/');
+        }
+    });
+
+    // view user details
+    app.get('/view_user', function(req, res) {
+        if (req.session.loggedin) {
+            let user_id = req.query.id;
+            let sqlquery = "SELECT * FROM users WHERE user_id=?";
+            db.query(sqlquery, user_id, (err, result) => {
+                if (err) {
+                    req.flash('error', err.message);
+                    res.redirect('/fail');
+                }
+                else {
+                    res.render('auth/view_user.html', {
+                        title: "View User",
+                        name: req.session.name,
+                        userData: result
+                    });
+                }
+            });
+        } else {
+            req.flash('error', 'Please login first!');
+            res.redirect('/');
+        }
+    });
+
+    app.get('/update_user', function(req, res) {
+        if (req.session.loggedin) {
+            let user_id = req.query.id;
+            let sqlquery = "SELECT * FROM users WHERE user_id=?";
+            db.query(sqlquery, user_id, (err, result) => {
+                if (err) {
+                    req.flash('error', err.message);
+                    res.redirect('/fail');
+                }
+                else {
+                    res.render('auth/update_user.html', {
+                        title: "Update User",
+                        name: req.session.name,
+                        userData: result
+                    });
+                }
+            });
+        } else {
+            req.flash('error', 'Please login first!');
+            res.redirect('/');
+        }
+    });
+
     //display error page
     app.get('/fail', function(req, res) {
         if (req.session.loggedin) {

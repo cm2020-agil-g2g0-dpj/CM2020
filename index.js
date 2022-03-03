@@ -63,18 +63,14 @@ app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
 // API LAYER
 
-// app.use((req, res, next) => {
-//     res.setHeader('Access-Control-Allow-Origin', '*');
-//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-//     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-//     next();
-//   });
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
+});
 
 
-// const groceryRoutes = require('./routes/grocery');
+const apiRoutes = require('./routes/api')
 
-// app.use('/groceries', groceryRoutes);
-
-const groceryRoutes = require('./routes/grocery')
-
-app.use('/groceries', groceryRoutes);
+app.use('/API', apiRoutes);

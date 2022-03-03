@@ -195,7 +195,7 @@ module.exports = function(app) {
     app.get('/manage_users', function(req, res) {
         if (req.session.loggedin) {
             // sql query
-            let sqlquery = "SELECT * FROM users";
+            let sqlquery = "SELECT * FROM users JOIN roles ON users.role=roles.role_id";
             // execute sql query
             db.query(sqlquery, (err, result) => {
                 if(err) {
@@ -221,7 +221,7 @@ module.exports = function(app) {
     app.get('/view_user', function(req, res) {
         if (req.session.loggedin) {
             let user_id = req.query.id;
-            let sqlquery = "SELECT * FROM users WHERE user_id=?";
+            let sqlquery = "SELECT * FROM users JOIN roles ON users.role=roles.role_id WHERE user_id=?";
             db.query(sqlquery, user_id, (err, result) => {
                 if (err) {
                     req.flash('error', err.message);
@@ -244,7 +244,7 @@ module.exports = function(app) {
     app.get('/update_user', function(req, res) {
         if (req.session.loggedin) {
             let user_id = req.query.id;
-            let sqlquery = "SELECT * FROM users WHERE user_id=?";
+            let sqlquery = "SELECT * FROM users JOIN roles ON users.role=roles.role_id WHERE user_id=?";
             db.query(sqlquery, user_id, (err, result) => {
                 if (err) {
                     req.flash('error', err.message);

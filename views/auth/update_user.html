@@ -44,7 +44,6 @@
                                                 <hr class="dropdown-divider">
                                             </li>
                                             <li><a class="dropdown-item" href="list_part">UPDATE PART</a></li>
-
                                         </ul>
                                     </li>
                                     <li class="nav-item dropdown pe-lg-4">
@@ -123,7 +122,7 @@
                                             <div class="mb-3">
                                                 <label for="p_status" class="form-label">Role</label>
                                                 <select class="form-select" id="p_status" name="p_status" aria-label="Part Design Status" required>
-                                                    <option selected disabled value="">Select Role</option>      
+                                                    <option selected value="<%= userData[0].role_id %>"><%= userData[0].role_name %></option>      
                                                     <option value="1">Admin</option>
                                                     <option value="2">Editor</option>
                                                     <option value="3">Basic</option>

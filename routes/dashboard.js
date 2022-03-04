@@ -203,11 +203,17 @@ module.exports = function(app) {
                     res.redirect('/fail');
                 }
                 else {
+                    let sqlquery_b = "SELECT * FROM users WHERE user_id=?";
+                    let uid = req.session.userid;
+                    db.query(sqlquery_b, uid, (err_b, result_b) => {
+
                     res.render('auth/manage_users.html', {
                         title: "Manage Users",
                         name: req.session.name,
+                        role: result_b[0]['role'],
                         allUsers: result
                     });
+                });
                 }
             });
         } else {
@@ -263,6 +269,33 @@ module.exports = function(app) {
             res.redirect('/');
         }
     });
+
+    // user roles
+    app.get('/user_roles', function(req, res) {
+        if (req.session.loggedin) {
+            // sql query
+            let sqlquery = "SELECT * FROM roles";
+            // execute sql query
+            db.query(sqlquery, (err, result) => {
+                if(err) {
+                    req.flash('error', err.message);
+                    res.redirect('/fail');
+                }
+                else {
+                    res.render('auth/user_roles.html', {
+                        title: "User Roles",
+                        name: req.session.name,
+                        userRoles: result
+                    });
+                }
+            });
+        } else {
+
+            req.flash('error', 'Please login first!');
+            res.redirect('/');
+        }
+    });
+
 
     //display error page
     app.get('/fail', function(req, res) {

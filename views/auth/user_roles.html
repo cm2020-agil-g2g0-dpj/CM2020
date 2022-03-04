@@ -87,53 +87,36 @@
     <!-- Spreadsheet -->
     <div id="main" class="container">
         <div class="container overflow-hidden">
-            <h3 class="mt-3"><a>LIST USERS</a></h3> 
+            <h3 class="mt-3"><a>USER ROLES</a></h3> 
             <div class="row g-2 mt-5">
                 <div class="col-sm-1">
                   <b>ID</b>
                 </div>
                 <div class="col-sm-2">
-                  <b>Name</b>
-                </div>
-                <div class="col-sm-3">
-                  <b>Email</b>
-                </div>
-                <div class="col-sm-3">
                   <b>Role</b>
                 </div>
                 <div class="col-sm-3">
-                   <b>Action</b>
+                  <b>Privilege</b>
+                </div>
+                <div class="col-sm-3">
+                </div>
+                <div class="col-sm-3">
                 </div>
                 <% var counter = 0; 
-                allUsers.forEach(function(user){ counter++; %> 
+                userRoles.forEach(function(role){ counter++; %> 
                 <div class="col-sm-1">
                     <%= counter %>
                 </div>
                 <div class="col-sm-2">
-                    <%= user.name %>
+                    <%= role.role_name %>
                 </div>
                 <div class="col-sm-3">
-                    <%= user.email %>
+                    <%= role.privilege %>
                 </div>
                 <div class="col-sm-3">
-                    <%= user.role_name %>
                 </div>
                 <div class="col-sm-3">
-                    <a href=view_user?id=<%= user.user_id %> >
-                        VIEW
-                    </a>
-                    <% if(role == 1 || role == 2) { %>
-                    |
-                    <a href=update_user?id=<%= user.user_id %> >
-                        EDIT
-                    </a>
-                    <% } %>
-                    <% if(role == 1) { %>
-                        |
-                        <a href=delete_user?id=<%= user.user_id %> >
-                            DELETE
-                        </a>
-                    <% } %>
+                    
                 </div>
                 <% }) %> 
             </div>

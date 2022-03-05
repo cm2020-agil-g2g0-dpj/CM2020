@@ -296,6 +296,117 @@ module.exports = function(app) {
         }
     });
 
+    app.get('/create_product', function(req, res) {
+        if (req.session.loggedin) {
+            let sqlquery = "SELECT * FROM parts;"
+            db.query(sqlquery, (err, result) => {
+                if(err) {
+                    req.flash('error', err.message);
+                    res.redirect('/fail');
+                }
+                else {
+                    res.render('auth/create_product.html', {
+                        title: "Create Product",
+                        name: req.session.name,
+                        userid: req.session.userid,
+                        allParts: result
+                    });
+                }
+            });
+        } else {
+            req.flash('error', 'Please login first!');
+            res.redirect('/');
+        }
+    });
+
+    // create part step 2: add assemblies
+    app.post('/add_assemblies',
+    body('part').not().isEmpty().trim().escape(), 
+    function(req, res) {
+        if (req.session.loggedin) {
+            // express validation
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                var error_msg = '';
+                errors.array().forEach(function(error) {
+                    error_msg += error.msg;
+                })
+                req.flash('error', error_msg);
+                res.redirect('/create_product');
+            }
+            else if(req.body.part || req.body.part !='') {
+                var partID = req.body.part;
+                let sqlquery_a = "SELECT * FROM assemblies WHERE Part_ID=?";
+                db.query(sqlquery_a, partID, (err, result) => {
+                    if (err) {
+                        req.flash('error', err)
+                        res.redirect('fail')
+                    } else if(result.length > 0) {
+                        req.flash('error', 'The product already exists!')
+                        res.redirect('/create_product')
+                    }
+                    else {
+                        let sqlquery_b = "SELECT * FROM parts WHERE Part_ID NOT IN (?)";
+                        db.query(sqlquery_b, partID, (err, result) => {
+                            if(err) {
+                                req.flash('error', err.message);
+                                res.redirect('/fail');
+                            }
+                            else {
+                                res.render('auth/add_assemblies.html', {
+                                    title: "Add Assemblies",
+                                    name: req.session.name,
+                                    user_id: req.session.userid,
+                                    part_id: req.body.part,
+                                    assemblies: result
+                                });
+                            }
+                        });
+                    }
+                });
+            } 
+            else {
+                req.flash('error', 'Part name missing');
+                res.redirect('/create_product');
+            }
+        } 
+        else {
+            req.flash('error', 'Please login first!');
+            res.redirect('/');
+        }
+    });
+
+    // create new product
+    app.post("/create_new_product",
+        function(req, res) {
+            if (req.session.loggedin) {
+                // server side validation
+                const assemblies = req.body.chk_assemblies;
+                if (typeof assemblies == 'undefined') {
+                    req.flash('error', 'No assemblies selected');
+                    res.redirect('/create_product');
+                }
+                // saving data in database
+                else if(assemblies.length > 0) {
+                    assemblies.forEach(function(assembly){
+                        let sqlquery_b = "INSERT INTO assemblies (Assembly_ID,Part_ID,Revision_ID,Part_Quantity) VALUES (?,?,?,?)";
+                        let new_asm = [assembly, req.body.part_id,1,1];
+                        db.query(sqlquery_b, new_asm, (err, result) => {
+                            if (err) {
+                                req.flash('error', err.message);
+                                res.redirect('/fail');
+                            } 
+                        });
+                    });
+                    req.flash('success', 'You have successfully added a new Product!');
+                    res.redirect('/update_success');
+                }
+            }
+            else {
+                req.flash('error', 'Please login first!');
+                res.redirect('/');
+            }
+        });
 
     //display error page
     app.get('/fail', function(req, res) {

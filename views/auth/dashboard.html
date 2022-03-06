@@ -191,15 +191,13 @@
         </div>
         <div class="content">
           <ul>
+            <% notifications.forEach(function(notification){  %> 
             <li>
-              <p><span>14:08 - Changed something</span></p>
+              <p><span><%= notification.Date.toISOString().slice(0, 19) %>
+                - <%= notification.Part_Notes_Rev %> 
+              </span></p>
             </li>
-            <li>
-              <p><span>14:08 - Changed something</span></p>
-            </li>
-            <li>
-              <p><span>14:08 - Changed something</span></p>
-            </li>
+            <% }) %>
           </ul>
         </div>
       </div>

@@ -91,8 +91,19 @@ module.exports = function(app) {
                         req.flash('error', err.message);
                         res.redirect('/fail');
                     } else {
-                        req.flash('success', 'You have successfully updated the part!');
-                        res.redirect('/update_success');
+                            let sqlquery_c = "INSERT INTO revision_history (Part_ID,Part_Notes_Rev,Approved_For_Release,Approved_By) VALUES (?,?,?,?)";
+                            // execute sql query
+                            let rev_history = [req.body.part_id, req.body.p_notes,1,req.body.part_owner];
+                            db.query(sqlquery_c, rev_history, (err, result) => {
+                                
+                                if (err) {
+                                    req.flash('error', err.message);
+                                    res.redirect('/fail');
+                                } else {
+                                    req.flash('success', 'You have successfully updated the part!');
+                                    res.redirect('/update_success');
+                                }
+                            });
                     }
                 });
             }
@@ -127,16 +138,76 @@ module.exports = function(app) {
 
     app.get('/BOM', function(req, res) {
         if (req.session.loggedin) {
-            res.render('auth/BOM.html', {
-                title: "Update Part",
-                name: req.session.name,
+            let sqlquery = "SELECT Part_ID, Part_Name FROM parts WHERE Part_ID IN (SELECT DISTINCT Part_ID FROM assemblies)";
+            db.query(sqlquery, (err, result) => {
+                if(err) {
+                    req.flash('error', err.message);
+                    res.redirect('/fail');
+                }
+                else {
+                    res.render('auth/BOM.html', {
+                        title: "Bill of Materials",
+                        name: req.session.name,
+                        allProducts: result
+                    });
+                }
             });
-
         } else {
             req.flash('error', 'Please login first!');
             res.redirect('/');
         }
     });
+
+        // BOM VIEW 
+        app.post('/BOM_VIEW',
+        body('product').not().isEmpty().trim().escape(), 
+        function(req, res) {
+            if (req.session.loggedin) {
+                // express validation
+                const errors = validationResult(req);
+                if (!errors.isEmpty()) {
+                    var error_msg = '';
+                    errors.array().forEach(function(error) {
+                        error_msg += error.msg;
+                    })
+                    req.flash('error', error_msg);
+                    res.redirect('/BOM');
+                }
+                else if(req.body.product || req.body.product !='') {
+                    var productID = req.body.product;
+                    let sqlquery = "SELECT assemblies.Part_ID,parts.Part_Name FROM assemblies LEFT JOIN parts ON assemblies.Assembly_ID=parts.Part_ID WHERE assemblies.Part_ID=?";
+                    db.query(sqlquery, productID, (err, result) => {
+                        if(err) {
+                            req.flash('error', err.message);
+                            res.redirect('/fail');
+                        }
+                        else {
+                            let sqlquery_b = "SELECT parts.Part_Name FROM parts WHERE parts.Part_ID=?";
+                            db.query(sqlquery_b, productID, (err, result_b) => {
+                                if(err) {
+                                    req.flash('error', err.message);
+                                    res.redirect('/fail');
+                                }
+                                res.render('auth/BOM_VIEW.html', {
+                                    title: "BOM VIEW",
+                                    name: req.session.name,
+                                    assemblies: result,
+                                    prodName: result_b[0]['Part_Name']
+                                });
+                            });
+                        }
+                    });
+                } 
+                else {
+                    req.flash('error', 'Product missing');
+                    res.redirect('/BOM');
+                }
+            } 
+            else {
+                req.flash('error', 'Please login first!');
+                res.redirect('/');
+            }
+        });    
 
     app.post("/create_new_part",
         body('p_name').not().isEmpty().trim().escape(),
@@ -290,12 +361,12 @@ module.exports = function(app) {
                 }
             });
         } else {
-
             req.flash('error', 'Please login first!');
             res.redirect('/');
         }
     });
 
+    // create product
     app.get('/create_product', function(req, res) {
         if (req.session.loggedin) {
             let sqlquery = "SELECT * FROM parts;"

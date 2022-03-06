@@ -201,3 +201,7 @@ main {
 .lh-tight {
   line-height: 1.25;
 }
+
+.min-height {
+  min-height: 350px;
+}

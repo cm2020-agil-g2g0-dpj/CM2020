@@ -30,7 +30,7 @@
                                         <a class="nav-link" href="BOM">BOM</a>
                                     </li>
                                     <li class="nav-item dropdown pe-lg-4">
-                                        <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">PART MANAGEMENT</a>
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">PART MANAGEMENT</a>
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                             <li><a class="dropdown-item" href="list_part">LIST PART</a> </li>
                                             <li><hr class="dropdown-divider"></li>
@@ -41,14 +41,16 @@
                                             <li><a class="dropdown-item" href="create_product">CREATE PRODUCT</a></li>                      
                                         </ul>
                                     </li>
+
                                     <li class="nav-item dropdown pe-lg-4">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">ACCOUNT</a>
+                                        <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">ACCOUNT</a>
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                             <li><a class="dropdown-item" href="user_roles">USER ROLES</a></li>
                                             <li><hr class="dropdown-divider"></li>
                                             <li><a class="dropdown-item" href="manage_users">MANAGE USERS</a></li>
                                         </ul>
                                     </li>
+                  
                                     <li class="nav-item pe-lg-4">
                                         <a class="nav-link" href="logout">LOGOUT</a>
                                     </li>
@@ -80,45 +82,53 @@
     <!-- Spreadsheet -->
     <div id="main" class="container">
         <div class="container overflow-hidden">
-            <h3 class="mt-3"><a>LIST PART</a></h3> 
+            <h3 class="mt-3"><a>LIST USERS</a></h3> 
             <div class="row g-2 mt-5">
                 <div class="col-sm-1">
                   <b>ID</b>
                 </div>
                 <div class="col-sm-2">
-                  <b>Part Name</b>
+                  <b>Name</b>
                 </div>
                 <div class="col-sm-3">
-                  <b>Created Date</b>
+                  <b>Email</b>
                 </div>
                 <div class="col-sm-3">
-                  <b>Design Status</b>
+                  <b>Role</b>
                 </div>
                 <div class="col-sm-3">
                    <b>Action</b>
                 </div>
                 <% var counter = 0; 
-                allParts.forEach(function(part){ counter++; %> 
+                allUsers.forEach(function(user){ counter++; %> 
                 <div class="col-sm-1">
                     <%= counter %>
                 </div>
                 <div class="col-sm-2">
-                    <%= part.Part_Name %>
+                    <%= user.name %>
                 </div>
                 <div class="col-sm-3">
-                    <%= part.Part_Created_Date.toISOString().slice(0, 19) %>
+                    <%= user.email %>
                 </div>
                 <div class="col-sm-3">
-                    <%= part.Part_Design_Status %> 
+                    <%= user.role_name %>
                 </div>
                 <div class="col-sm-3">
-                    <a href=view_part?id=<%= part.Part_ID %> >
+                    <a href=view_user?id=<%= user.user_id %> >
                         VIEW
                     </a>
+                    <% if(role == 1 || role == 2) { %>
                     |
-                    <a href=update_part?id=<%= part.Part_ID %> >
+                    <a href=update_user?id=<%= user.user_id %> >
                         EDIT
                     </a>
+                    <% } %>
+                    <% if(role == 1) { %>
+                        |
+                        <a href=delete_user?id=<%= user.user_id %> >
+                            DELETE
+                        </a>
+                    <% } %>
                 </div>
                 <% }) %> 
             </div>

@@ -50,9 +50,19 @@ module.exports = function (app) {
    //display home page
     app.get('/dashboard', function(req, res) {
         if (req.session.loggedin) {
-            res.render('auth/dashboard.html', {
-                title:"Dashboard",
-                name: req.session.name,     
+            let sqlquery = "SELECT * FROM revision_history";
+            db.query(sqlquery, (err, result) => {
+                if (err) {
+                    req.flash('error', err.message);
+                    res.redirect('/fail');
+                }
+                else {
+                    res.render('auth/dashboard.html', {
+                        title:"Dashboard",
+                        name: req.session.name,
+                        notifications: result     
+                    });
+                }
             });
  
         } else {
@@ -118,7 +128,6 @@ module.exports = function (app) {
                  });
                 }
             });
-           
         }
     });
 

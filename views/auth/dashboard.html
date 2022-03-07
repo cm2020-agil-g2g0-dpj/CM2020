@@ -45,32 +45,27 @@
                         id="navbarDropdown"
                         role="button"
                         data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                        >PART MANAGEMENT</a
-                      >
-                      <ul
-                        class="dropdown-menu"
-                        aria-labelledby="navbarDropdown"
-                      >
-                      <li>
-                        <a class="dropdown-item" href="list_part">LIST PART</a>  
-                      </li>
-                      <li>
-                        <hr class="dropdown-divider">
-                      </li>
-                      <li>
-                          <a class="dropdown-item" href="create_part"
-                            >CREATE PART</a
-                          >
-                        </li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li>
-                          <a class="dropdown-item" href="list_part"
-                            >UPDATE PART</a
-                          >
-                        </li>
+                        aria-expanded="false">PART MANAGEMENT</a>
+                      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" href="list_part">LIST PART</a> </li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="create_part">CREATE PART</a></li>
+                      <li><hr class="dropdown-divider" /></li>
+                      <li><a class="dropdown-item" href="list_part">UPDATE PART</a></li>
+                      <li><hr class="dropdown-divider" /></li>
+                      <li><a class="dropdown-item" href="create_product">CREATE PRODUCT</a></li>
                       </ul>
                     </li>
+                    
+                    <li class="nav-item dropdown pe-lg-4">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">ACCOUNT</a>
+                      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <li><a class="dropdown-item" href="user_roles">USER ROLES</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="manage_users">MANAGE USERS</a></li>
+                      </ul>
+                    </li>
+
                     <li class="nav-item pe-lg-4">
                       <a class="nav-link" href="logout">LOGOUT</a>
                     </li>
@@ -120,19 +115,19 @@
         <ul class="list-unstyled ps-0">
           <li class="mb-1">
             <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-              Select Product
+              Parts
             </button>
             <div class="collapse show" id="home-collapse">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" class="link-dark rounded">Chair</a></li>
-                <li><a href="#" class="link-dark rounded">Table</a></li>
-                <li><a href="#" class="link-dark rounded">Toilet</a></li>
+                <li><a href="#" class="link-dark rounded">List Part</a></li>
+                <li><a href="#" class="link-dark rounded">Create Part</a></li>
+                <li><a href="#" class="link-dark rounded">Update Part</a></li>
               </ul>
             </div>
           </li>
           <li class="mb-1">
             <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-              View
+              BOM
             </button>
             <div class="collapse" id="dashboard-collapse">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
@@ -146,7 +141,7 @@
           </li>
           <li class="mb-1">
             <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-              Notifications
+              Revision History
             </button>
             <div class="collapse" id="orders-collapse">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
@@ -184,17 +179,10 @@
 
       <div class="container content" style="padding: 20px;">
         <div class="text-center">
-          <H1>Pages to be added with Corresponding headers!</H1>
+          <H1>Dashboard</H1>
         </div>
-        <div class="content">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos, neque quod! Id necessitatibus, natus velit tenetur asperiores sequi eius, placeat voluptate error omnis veritatis molestias sapiente voluptatem perspiciatis quia ipsum.</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos, neque quod! Id necessitatibus, natus velit tenetur asperiores sequi eius, placeat voluptate error omnis veritatis molestias sapiente voluptatem perspiciatis quia ipsum.</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos, neque quod! Id necessitatibus, natus velit tenetur asperiores sequi eius, placeat voluptate error omnis veritatis molestias sapiente voluptatem perspiciatis quia ipsum.</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos, neque quod! Id necessitatibus, natus velit tenetur asperiores sequi eius, placeat voluptate error omnis veritatis molestias sapiente voluptatem perspiciatis quia ipsum.</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos, neque quod! Id necessitatibus, natus velit tenetur asperiores sequi eius, placeat voluptate error omnis veritatis molestias sapiente voluptatem perspiciatis quia ipsum.</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos, neque quod! Id necessitatibus, natus velit tenetur asperiores sequi eius, placeat voluptate error omnis veritatis molestias sapiente voluptatem perspiciatis quia ipsum.</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos, neque quod! Id necessitatibus, natus velit tenetur asperiores sequi eius, placeat voluptate error omnis veritatis molestias sapiente voluptatem perspiciatis quia ipsum.</p>
-         
+        <div class="content" style="min-height: 350px;">
+          
           <img src="" alt="">
         </div>
         <hr>
@@ -203,15 +191,13 @@
         </div>
         <div class="content">
           <ul>
+            <% notifications.forEach(function(notification){  %> 
             <li>
-              <p><span>14:08 - Changed something</span></p>
+              <p><span><%= notification.Date.toISOString().slice(0, 19) %>
+                - <%= notification.Part_Notes_Rev %> 
+              </span></p>
             </li>
-            <li>
-              <p><span>14:08 - Changed something</span></p>
-            </li>
-            <li>
-              <p><span>14:08 - Changed something</span></p>
-            </li>
+            <% }) %>
           </ul>
         </div>
       </div>

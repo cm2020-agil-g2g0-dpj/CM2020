@@ -40,7 +40,7 @@ module.exports = function (app) {
             else {
                 req.session.loggedin = true;
                 req.session.name = result[0]['name'];
-                req.session.userid = result[0]['user_id'];
+                req.session.id = result[0]['user_id'];
                 res.redirect('dashboard');
             }
             });

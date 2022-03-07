@@ -1,8 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
+
 -- Generation Time: Mar 06, 2022 at 02:38 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.15
@@ -58,18 +59,19 @@ INSERT INTO `assemblies` (`Index`, `Assembly_ID`, `Part_ID`, `Revision_ID`, `Par
 CREATE TABLE `parts` (
   `Part_ID` int(11) NOT NULL,
   `Part_Name` text NOT NULL,
-  `Part_Created_Date` date NOT NULL DEFAULT current_timestamp(),
+  `Part_Created_Date` date NOT NULL,
   `Part_Description` text NOT NULL,
   `Part_Specification_Link` text NOT NULL,
   `Part_Issues` text NOT NULL,
   `Part_Notes` text NOT NULL,
   `Part_Design_Status` text NOT NULL,
-  `Part_Owner` int(11) NOT NULL
+  `Part_owner` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `parts`
 --
+
 
 INSERT INTO `parts` (`Part_ID`, `Part_Name`, `Part_Created_Date`, `Part_Description`, `Part_Specification_Link`, `Part_Issues`, `Part_Notes`, `Part_Design_Status`, `Part_Owner`) VALUES
 (1, '1-1000', '2022-02-15', 'Handle body', 'Part Specification Link6', 'Handle cracking', 'Handle cracking - cleared issue', 'Issued', 1),
@@ -176,8 +178,8 @@ ALTER TABLE `assemblies`
 ALTER TABLE `parts`
   ADD PRIMARY KEY (`Part_ID`),
   ADD KEY `Part_Name` (`Part_Name`(768)),
-  ADD KEY `part_owner` (`Part_Owner`),
-  ADD KEY `part_owner_2` (`Part_Owner`);
+  ADD KEY `part_owner` (`Part_owner`),
+  ADD KEY `part_owner_2` (`Part_owner`);
 
 --
 -- Indexes for table `revision_history`
@@ -213,12 +215,6 @@ ALTER TABLE `assemblies`
   MODIFY `Index` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `parts`
---
-ALTER TABLE `parts`
-  MODIFY `Part_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
---
 -- AUTO_INCREMENT for table `revision_history`
 --
 ALTER TABLE `revision_history`
@@ -244,8 +240,8 @@ ALTER TABLE `users`
 -- Constraints for table `assemblies`
 --
 ALTER TABLE `assemblies`
-  ADD CONSTRAINT `assemblyid` FOREIGN KEY (`Assembly_ID`) REFERENCES `parts` (`Part_ID`),
-  ADD CONSTRAINT `partid` FOREIGN KEY (`Part_ID`) REFERENCES `parts` (`Part_ID`);
+  ADD CONSTRAINT `assemblies_ibfk_1` FOREIGN KEY (`Part_ID`) REFERENCES `parts` (`Part_ID`),
+  ADD CONSTRAINT `assemblies_ibfk_2` FOREIGN KEY (`Assembly_ID`) REFERENCES `parts` (`Part_ID`);
 
 --
 -- Constraints for table `parts`

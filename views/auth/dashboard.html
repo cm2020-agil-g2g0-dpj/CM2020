@@ -7,10 +7,8 @@
     <!-- Google fonts library. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap"
+      rel="stylesheet"/>
   </head>
   <body>
     <header>
@@ -25,8 +23,7 @@
                 data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent"
                 aria-expanded="false"
-                aria-label="Toggle navigation"
-              >
+                aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -78,112 +75,64 @@
         </div>
         </div>
       </div>
+      <div id="main-logo" class="container-fluid"></div>
+        <div class="row row-cols-3 g-2 mb-3">
+            <div id="logo" class="col text-left">
+                <!-- Using bootstrap padding utility class. -->
+                <div class="p-3">
+                <p>Welcome <%= name %></p>
+
+                </div>
+            </div>
+            <div class="col">
+            </div>
+            <div class="col">
+            </div>
+        </div>
+    </div>
+ </div>
     </header>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-
-    
-    <!-- Custom styles for this template -->
-    <link href="sidebars.css" rel="stylesheet">
-
-  
-    
-    <main>
-
-      <div class="b-example-divider"></div>
-
-      <div class="flex-shrink-0 p-3 bg-white" style="width: 280px;">
-        <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-          <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
-          <span class="fs-5 fw-semibold">Dashboard</span>
-        </a>
-        <ul class="list-unstyled ps-0">
-          <li class="mb-1">
-            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-              Parts
-            </button>
-            <div class="collapse show" id="home-collapse">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" class="link-dark rounded">List Part</a></li>
-                <li><a href="#" class="link-dark rounded">Create Part</a></li>
-                <li><a href="#" class="link-dark rounded">Update Part</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="mb-1">
-            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-              BOM
-            </button>
-            <div class="collapse" id="dashboard-collapse">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" class="link-dark rounded">Product Data</a></li>
-                <li><a href="#" class="link-dark rounded">Project Progress</a></li>
-                <li><a href="#" class="link-dark rounded">Workflow & Change Management</a></li>
-                <li><a href="#" class="link-dark rounded">User Access Levels</a></li>
-                <li><a href="#" class="link-dark rounded">Reports and Collaboration</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="mb-1">
-            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-              Revision History
-            </button>
-            <div class="collapse" id="orders-collapse">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" class="link-dark rounded">1) Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus reprehenderit, assumenda excepturi cum sapiente accusamus numquam magni odio eius! Ducimus similique, odit assumenda sint distinctio velit suscipit at maxime in?</a></li>
-                <li><a href="#" class="link-dark rounded">2) Processed</a></li>
-                <li><a href="#" class="link-dark rounded">3) Shipped: 
-                <li><a href="#" class="link-dark rounded">14 : 07 , 25/12/2020 <span></span>  </a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="border-top my-3"></li>
-          <li class="mb-1">
-            <button class="btn btn-toggle align-items-center rounded collapsed " data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-              Account
-            </button>
-            <div class="collapse" id="account-collapse">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                
-                <li><a href="#" class="link-dark rounded">Profile</a></li>
-                <li><a href="#" class="link-dark rounded">Settings</a></li>
-                <li><a href="#" class="link-dark rounded">Sign out</a></li>
-              </ul>
-            </div>
-          </li>
-        </ul>
-      </div>
-    
-      
-  
-      <div class="b-example-divider" ></div>
-
-
-        <!-- Code below to be changed to update Home dashboard page!   -->
-
-
-      <div class="container content" style="padding: 20px;">
+    <div id="main" class="container">
+      <!-- Code below to be changed to update Home dashboard page!   -->
+      <div class="container content mt-3">
         <div class="text-center">
           <H1>Dashboard</H1>
         </div>
-        <div class="content" style="min-height: 350px;">
-          
-          <img src="" alt="">
+        
+        <div id="main_home" class="row row-cols-1 row-cols-md-3 g-4 mt-3">
+          <div class="col-md-4 text-center">
+            <div class="p-3 main-heading border">
+              <h2><a href="/BOM">BOM</a></h2>
+            </div>
+          </div>
+          <div class="col-md-4 text-center">
+            <div class="p-3 main-heading border">
+              <h2><a href="create_part">CREATE PART</a></h2>
+            </div>
+          </div>
+          <div class="col-md-4 text-center">
+            <div class="p-3 main-heading border">
+              <h2><a href="create_product">CREATE PRODUCT</a></h2>
+            </div>
+          </div>
+
+          <div class="col-md-4 text-center">
+            <div class="p-3 main-heading border">
+              <h2><a href="list_part">LIST PART</a></h2>
+            </div>
+          </div>
+          <div class="col-md-4 text-center">
+            <div class="p-3 main-heading border">
+              <h2><a href="list_part">UPDATE PART</a></h2>
+            </div>
+          </div>
+          <div class="col-md-4 text-center">
+            <div class="p-3 main-heading border">
+              <h2>MANAGE USERS</h2>
+            </div>
+          </div>
+
         </div>
         <hr>
         <div class="text-center">
@@ -201,13 +150,8 @@
           </ul>
         </div>
       </div>
- 
-     
-    </main>
-  
- <!-- <hr style="margin-top: 0px;"> -->
-   
-   
+    </div>
+
     <footer >
       <div class="container-fluid border-top ">
         <div id="footerbottom" class="row row-cols-1 g-2">

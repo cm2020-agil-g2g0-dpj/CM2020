@@ -267,7 +267,6 @@ module.exports = function(app) {
                     let sqlquery_b = "SELECT * FROM users WHERE user_id=?";
                     let uid = req.session.userid;
                     db.query(sqlquery_b, uid, (err_b, result_b) => {
-
                     res.render('auth/manage_users.html', {
                         title: "Manage Users",
                         name: req.session.name,

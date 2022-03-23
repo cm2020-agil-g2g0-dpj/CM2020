@@ -94,12 +94,43 @@
                 <div class="col-sm-8">
                     <div class="mb-4">
                         <label for="assembly" class="form-label"><b>Assemblies:</b></label> 
-                        <div> 
-                        <% let count = 0
-                        assemblies.forEach(function(assembly){ count++ %>
-                        <%= count %>. <%= assembly.Part_Name %> <br>
-                        <% }) %>   
+                        <div class="container overflow-hidden">
+                            <div class="row g-2 mt-5">
+                                <div class="col-sm-1">
+                                  <b>ID</b>
+                                </div>
+                                <div class="col-sm-2">
+                                  <b>Part Name</b>
+                                </div>
+                                <div class="col-sm-3">
+                                  <b>Created Date</b>
+                                </div>
+                                <div class="col-sm-3">
+                                  <b>Design Status</b>
+                                </div>
+                                <div class="col-sm-3">
+                                </div>
+                                <% var counter = 0; 
+                                assemblies.forEach(function(part){ counter++; %> 
+                                <div class="col-sm-1">
+                                    <%= counter %>
+                                </div>
+                                <div class="col-sm-2">
+                                    <%= part.Part_Name %>
+                                </div>
+                                <div class="col-sm-3">
+                                    <%= part.Part_Created_Date.toISOString().slice(0, 19) %>
+                                </div>
+                                <div class="col-sm-3">
+                                    <%= part.Part_Design_Status %> 
+                                </div>
+                                <div class="col-sm-3">
+                                    
+                                </div>
+                                <% }) %> 
+                            </div>
                         </div>
+
                     </div>
                 </div> 
             </div>

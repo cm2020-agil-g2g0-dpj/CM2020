@@ -153,56 +153,56 @@ module.exports = function(app) {
         }
     });
 
-        // BOM VIEW 
-        app.post('/BOM_VIEW',
-        body('product').not().isEmpty().trim().escape(), 
-        function(req, res) {
-            if (req.session.loggedin) {
-                // express validation
-                const errors = validationResult(req);
-                if (!errors.isEmpty()) {
-                    var error_msg = '';
-                    errors.array().forEach(function(error) {
-                        error_msg += error.msg;
-                    })
-                    req.flash('error', error_msg);
-                    res.redirect('/BOM');
-                }
-                else if(req.body.product || req.body.product !='') {
-                    var productID = req.body.product;
-                    let sqlquery = "SELECT assemblies.Part_ID,parts.Part_Name FROM assemblies LEFT JOIN parts ON assemblies.Assembly_ID=parts.Part_ID WHERE assemblies.Part_ID=?";
-                    db.query(sqlquery, productID, (err, result) => {
-                        if(err) {
-                            req.flash('error', err.message);
-                            res.redirect('/fail');
-                        }
-                        else {
-                            let sqlquery_b = "SELECT parts.Part_Name FROM parts WHERE parts.Part_ID=?";
-                            db.query(sqlquery_b, productID, (err, result_b) => {
-                                if(err) {
-                                    req.flash('error', err.message);
-                                    res.redirect('/fail');
-                                }
-                                res.render('auth/BOM_VIEW.html', {
-                                    title: "BOM VIEW",
-                                    name: req.session.name,
-                                    assemblies: result,
-                                    prodName: result_b[0]['Part_Name']
-                                });
+    // BOM VIEW 
+    app.post('/BOM_VIEW',
+    body('product').not().isEmpty().trim().escape(), 
+    function(req, res) {
+        if (req.session.loggedin) {
+            // express validation
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                var error_msg = '';
+                errors.array().forEach(function(error) {
+                    error_msg += error.msg;
+                })
+                req.flash('error', error_msg);
+                res.redirect('/BOM');
+            }
+            else if(req.body.product || req.body.product !='') {
+                var productID = req.body.product;
+                let sqlquery = "SELECT * FROM assemblies LEFT JOIN parts ON assemblies.Assembly_ID=parts.Part_ID WHERE assemblies.Part_ID=?";
+                db.query(sqlquery, productID, (err, result) => {
+                    if(err) {
+                        req.flash('error', err.message);
+                        res.redirect('/fail');
+                    }
+                    else {
+                        let sqlquery_b = "SELECT parts.Part_Name FROM parts WHERE parts.Part_ID=?";
+                        db.query(sqlquery_b, productID, (err, result_b) => {
+                            if(err) {
+                                req.flash('error', err.message);
+                                res.redirect('/fail');
+                            }
+                            res.render('auth/BOM_VIEW.html', {
+                                title: "BOM VIEW",
+                                name: req.session.name,
+                                assemblies: result,
+                                prodName: result_b[0]['Part_Name']
                             });
-                        }
-                    });
-                } 
-                else {
-                    req.flash('error', 'Product missing');
-                    res.redirect('/BOM');
-                }
+                        });
+                    }
+                });
             } 
             else {
-                req.flash('error', 'Please login first!');
-                res.redirect('/');
+                req.flash('error', 'Product missing');
+                res.redirect('/BOM');
             }
-        });    
+        } 
+        else {
+            req.flash('error', 'Please login first!');
+            res.redirect('/');
+        }
+    });    
 
     app.post("/create_new_part",
         body('p_name').not().isEmpty().trim().escape(),
@@ -407,7 +407,7 @@ module.exports = function(app) {
                     }
                     else {
                         let sqlquery_b = "SELECT * FROM parts WHERE Part_ID NOT IN (?)";
-                        db.query(sqlquery_b, partID, (err, result) => {
+                        db.query(sqlquery_b, partID, (err, result_b) => {
                             if(err) {
                                 req.flash('error', err.message);
                                 res.redirect('/fail');
@@ -418,7 +418,7 @@ module.exports = function(app) {
                                     name: req.session.name,
                                     user_id: req.session.userid,
                                     part_id: req.body.part,
-                                    assemblies: result
+                                    assemblies: result_b
                                 });
                             }
                         });

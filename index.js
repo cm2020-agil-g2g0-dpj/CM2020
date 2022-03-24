@@ -11,6 +11,11 @@ const app = express();
 const mysql = require("mysql");
 const port = 8090;
 
+var expect  = require('chai').expect;
+var chai = require('chai');
+var chaiHttp = require('chai-http');
+chai.use(chaiHttp);
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
 app.use(express.static('public'));
@@ -23,7 +28,6 @@ app.use(session({
 }));
 
 app.use(flash());
-
 // error handler
 app.use(function(err, req, res, next) {
     // set locals, only providing error in development

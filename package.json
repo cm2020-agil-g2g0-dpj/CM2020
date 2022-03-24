@@ -4,7 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "mocha test/*.js --exit",
         "start": "nodemon index.js",
         "start:dev": "DEBUG=nodejs-mysql:* nodemon ./bin/www"
     },
@@ -24,6 +24,9 @@
         "mysql2": "^2.3.3"
     },
     "devDependencies": {
+        "chai": "*",
+        "chai-http": "^4.3.0",
+        "mocha": "*",
         "nodemon": "^2.0.15"
     }
 }

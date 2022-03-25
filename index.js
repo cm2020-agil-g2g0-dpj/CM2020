@@ -57,6 +57,7 @@ global.db = db;
 
 require("./routes/main")(app);
 require("./routes/dashboard")(app);
+
 app.set("views", __dirname + "/views");
 app.set("view engine", "ejs");
 app.engine("html", require("ejs").renderFile);
@@ -75,6 +76,9 @@ app.use((req, res, next) => {
 });
 
 
-const apiRoutes = require('./routes/api')
+const apiRoutes = require('./routes/api');
 
 app.use('/API', apiRoutes);
+
+// export the app object for other modules
+exports = module.exports = app;

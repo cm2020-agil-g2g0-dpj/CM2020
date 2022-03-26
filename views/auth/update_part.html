@@ -128,7 +128,7 @@
                                             <div class="mb-4">
                                                 <label for="p_status" class="form-label">Part Design Status</label>
                                                 <select class="form-select" id="p_status" name="p_status" aria-label="Part Design Status" required>
-                                                    <option selected disabled value="">Part Status</option>      
+                                                    <option selected value="<%= partData[0].Part_Design_Status %>"><%= partData[0].Part_Design_Status %></option>      
                                                     <option value="Issued">Issued</option>
                                                     <option value="Issued - Revision not started">Issued - Revision not started</option>
                                                     <option value="Issued - Revision in work">Issued - Revision in work</option>

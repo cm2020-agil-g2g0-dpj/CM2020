@@ -24,7 +24,7 @@ module.exports = function(app) {
             res.redirect('/');
         }
     });
-
+    // create a new part
     app.get('/create_part', function(req, res) {
         if (req.session.loggedin) {
             res.render('auth/create_part.html', {
@@ -38,7 +38,7 @@ module.exports = function(app) {
             res.redirect('/');
         }
     });
-
+    // update part page
     app.get('/update_part', function(req, res) {
         if (req.session.loggedin) {
             let part_id = req.query.id;
@@ -61,7 +61,7 @@ module.exports = function(app) {
             res.redirect('/');
         }
     });
-
+    // update part form submission
     app.post("/update_new_part",
         body('p_name').not().isEmpty().trim().escape(),
         body('p_spec_link').not().isEmpty().trim().escape(),
@@ -107,7 +107,7 @@ module.exports = function(app) {
                 });
             }
         });
-
+    // view parts page
     app.get('/view_part', function(req, res) {
         if (req.session.loggedin) {
             let part_id = req.query.id;
@@ -129,7 +129,7 @@ module.exports = function(app) {
             res.redirect('/');
         }
     });
-
+    // BOM page
     app.get('/BOM', function(req, res) {
         if (req.session.loggedin) {
             let sqlquery = "SELECT Part_ID, Part_Name FROM parts WHERE Part_ID IN (SELECT DISTINCT Part_ID FROM assemblies)";
@@ -203,7 +203,7 @@ module.exports = function(app) {
             res.redirect('/');
         }
     });    
-
+    // create a new part
     app.post("/create_new_part",
         body('p_name').not().isEmpty().trim().escape(),
         body('p_spec_link').not().isEmpty().trim().escape(),
@@ -223,7 +223,7 @@ module.exports = function(app) {
                 res.redirect('/create_part');
             }
             // saving data in database
-            else {
+            else { // check if the part already exists
                 let sqlquery_a = "SELECT * FROM parts WHERE part_name=? OR part_specification_link=?";
                 let user = [req.body.p_name, req.body.p_spec_link]
                 db.query(sqlquery_a, user, (err, result) => {
@@ -306,7 +306,7 @@ module.exports = function(app) {
             res.redirect('/');
         }
     });
-
+    // update user - page
     app.get('/update_user', function(req, res) {
         if (req.session.loggedin) {
             let user_id = req.query.id;

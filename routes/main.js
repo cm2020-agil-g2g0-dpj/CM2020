@@ -1,15 +1,15 @@
 const { body, validationResult } = require('express-validator');
 
 module.exports = function (app) {
-
+    // index page
     app.get("/", function (req, res) {
         res.render("index.html");
     });
-
+    // user registration
     app.get("/register", function (req, res) {
         res.render("register.html");
     });
-
+    // user authentication
     app.post("/auth",
     body('username').not().isEmpty().trim().escape(),
     body('password').not().isEmpty().trim().escape(),  
@@ -38,6 +38,7 @@ module.exports = function (app) {
                 res.redirect('/');
             }
             else {
+                // session variable
                 req.session.loggedin = true;
                 req.session.name = result[0]['name'];
                 req.session.userid = result[0]['user_id'];
@@ -79,11 +80,11 @@ module.exports = function (app) {
         }
         res.redirect('success');
      });
-   
+     // success page
      app.get("/success", function (req, res) {
         res.render("success.html");
     });
-
+    // create a new user form submission
     app.post("/new_user", 
     body('name').not().isEmpty().trim().escape(),
     body('email').normalizeEmail().isEmail(), 
@@ -102,7 +103,7 @@ module.exports = function (app) {
         }
         // saving data in database
         else
-        {
+        {   // check if the user already exists
             let sqlquery_a  = "SELECT * FROM users WHERE username=? OR email=?";
             let user = [req.body.username, req.body.email]
             db.query(sqlquery_a, user, (err, result) => {

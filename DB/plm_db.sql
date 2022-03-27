@@ -1,10 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
-
--- Generation Time: Mar 06, 2022 at 02:38 PM
+-- Generation Time: Mar 27, 2022 at 04:20 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.15
 
@@ -48,7 +47,15 @@ INSERT INTO `assemblies` (`Index`, `Assembly_ID`, `Part_ID`, `Revision_ID`, `Par
 (5, 6, 1, 1, 1),
 (6, 7, 1, 1, 1),
 (7, 8, 1, 1, 1),
-(8, 9, 1, 1, 1);
+(8, 9, 1, 1, 1),
+(9, 7, 2, 1, 1),
+(10, 8, 2, 1, 1),
+(11, 9, 2, 1, 1),
+(12, 10, 2, 1, 1),
+(13, 11, 2, 1, 1),
+(14, 16, 2, 1, 1),
+(15, 17, 2, 1, 1),
+(16, 18, 2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -59,26 +66,25 @@ INSERT INTO `assemblies` (`Index`, `Assembly_ID`, `Part_ID`, `Revision_ID`, `Par
 CREATE TABLE `parts` (
   `Part_ID` int(11) NOT NULL,
   `Part_Name` text NOT NULL,
-  `Part_Created_Date` date NOT NULL,
+  `Part_Created_Date` date NOT NULL DEFAULT current_timestamp(),
   `Part_Description` text NOT NULL,
   `Part_Specification_Link` text NOT NULL,
   `Part_Issues` text NOT NULL,
   `Part_Notes` text NOT NULL,
   `Part_Design_Status` text NOT NULL,
-  `Part_owner` int(11) NOT NULL
+  `Part_Owner` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `parts`
 --
 
-
 INSERT INTO `parts` (`Part_ID`, `Part_Name`, `Part_Created_Date`, `Part_Description`, `Part_Specification_Link`, `Part_Issues`, `Part_Notes`, `Part_Design_Status`, `Part_Owner`) VALUES
 (1, '1-1000', '2022-02-15', 'Handle body', 'Part Specification Link6', 'Handle cracking', 'Handle cracking - cleared issue', 'Issued', 1),
 (2, '2-1000', '2022-02-13', 'Screw', 'Part Specification Link 7', 'Screw issue', 'Screw issue cleared', 'Issued - Revision in work', 1),
 (3, '2-1001', '2022-02-13', 'Washer', '', '', '', 'Issued', 1),
 (4, '1-1001', '2022-02-13', 'Door', '', '', 'Looking for alternative material', 'Issued, revision in work', 6),
-(5, '2-1002', '2022-02-13', 'Hinge', '', 'Hinge sticking', '', 'Issued, revision not started', 6),
+(5, '2-1002', '2022-02-13', 'Hinge', 'Part Specification Link10', 'Hinge sticking', 'Hinge sticking - fixed', 'Issued', 6),
 (6, '2-1003', '2022-02-13', 'Screw', '', '', '', 'Issued', 6),
 (7, '1-1003', '2022-02-13', 'Cabinet body', '', '', '', 'Issued', 8),
 (8, '0-1000', '2022-02-13', 'Handle Assembly', '', '', '', 'Issued', 9),
@@ -110,7 +116,8 @@ CREATE TABLE `revision_history` (
 
 INSERT INTO `revision_history` (`Revision_ID`, `Part_ID`, `Date`, `Part_Notes_Rev`, `Approved_For_Release`, `Approved_By`) VALUES
 (1, 1, '2022-03-06', 'Handle cracking - cleared issue', 0x31, 1),
-(2, 2, '2022-03-06', 'Screw issue cleared', 0x31, 1);
+(2, 2, '2022-03-06', 'Screw issue cleared', 0x31, 1),
+(3, 5, '2022-03-06', 'Hinge sticking - fixed', 0x31, 6);
 
 -- --------------------------------------------------------
 
@@ -153,10 +160,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `name`, `email`, `username`, `password`, `role`) VALUES
-(1, 'Jibin Joseph', 'jibinthayyil@gmail.com', 'jibin', 'CP4UBkKU6XZ#m', 1),
-(2, 'Abin Joseph', 'abinjoseph06@gmail.com', 'abin', 'pwd', 3),
+(1, 'Jibin Joseph', 'jibinthayyil@gmail.com', 'jibin', 'CP4UBkKU6XZ#m', 2),
+(2, 'Abin Joseph', 'abinjoseph06@gmail.com', 'abin', 'password', 3),
 (6, 'bryce', 'fake@fake.com', 'bryce', 'password', 3),
-(8, 'Vicus', 'vicus@fake.com', 'vicus', 'password', 1),
+(8, 'Vicus', 'vicus@fake.com', 'vicus', 'password', 2),
 (9, 'Chaan', 'chaan@fake.com', 'chaan', 'password', 3);
 
 --
@@ -178,8 +185,8 @@ ALTER TABLE `assemblies`
 ALTER TABLE `parts`
   ADD PRIMARY KEY (`Part_ID`),
   ADD KEY `Part_Name` (`Part_Name`(768)),
-  ADD KEY `part_owner` (`Part_owner`),
-  ADD KEY `part_owner_2` (`Part_owner`);
+  ADD KEY `part_owner` (`Part_Owner`),
+  ADD KEY `part_owner_2` (`Part_Owner`);
 
 --
 -- Indexes for table `revision_history`
@@ -212,13 +219,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `assemblies`
 --
 ALTER TABLE `assemblies`
-  MODIFY `Index` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `Index` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `parts`
+--
+ALTER TABLE `parts`
+  MODIFY `Part_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `revision_history`
 --
 ALTER TABLE `revision_history`
-  MODIFY `Revision_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Revision_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -240,8 +253,8 @@ ALTER TABLE `users`
 -- Constraints for table `assemblies`
 --
 ALTER TABLE `assemblies`
-  ADD CONSTRAINT `assemblies_ibfk_1` FOREIGN KEY (`Part_ID`) REFERENCES `parts` (`Part_ID`),
-  ADD CONSTRAINT `assemblies_ibfk_2` FOREIGN KEY (`Assembly_ID`) REFERENCES `parts` (`Part_ID`);
+  ADD CONSTRAINT `assemblyid` FOREIGN KEY (`Assembly_ID`) REFERENCES `parts` (`Part_ID`),
+  ADD CONSTRAINT `partid` FOREIGN KEY (`Part_ID`) REFERENCES `parts` (`Part_ID`);
 
 --
 -- Constraints for table `parts`
@@ -253,7 +266,7 @@ ALTER TABLE `parts`
 -- Constraints for table `revision_history`
 --
 ALTER TABLE `revision_history`
-  ADD CONSTRAINT `revision_history_ibfk_2` FOREIGN KEY (`Approved_by`) REFERENCES `users` (`user_id`);
+  ADD CONSTRAINT `revision_history_ibfk_2` FOREIGN KEY (`Approved_By`) REFERENCES `users` (`user_id`);
 
 --
 -- Constraints for table `users`
